@@ -6,10 +6,17 @@ public class ItemMan {
 
     // Constructor
     public ItemMan(int id){
-
+    	this.id = id;
     }
 
-    // Getters and Setters
+    public ItemMan(int num, String name2, boolean b) {
+	id = num;
+	name = name2;
+	b = false;
+	
+	}
+
+	// Getters and Setters
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
 

@@ -20,11 +20,11 @@ public class ListItem {
         this.desc = desc;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setCost(int d) {
+        this.cost = d;
     }
 
     public ListItem getNext() {
@@ -36,8 +36,9 @@ public class ListItem {
 
     @Override
     public String toString() {
-        return "|" + this.name
-                   + " || price:" + this.cost + "\n ________________________________________________________________| \n";
+        return "[ListItem name=" + this.name
+                + " desc=" + this.desc
+                + " cost=" + this.cost + "]";
     }
 
     //
@@ -45,6 +46,6 @@ public class ListItem {
     //
     private String name;
     private String desc;
-    private double cost;
+    private int cost;
     private ListItem next = null;
 }

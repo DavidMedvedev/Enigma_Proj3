@@ -11,41 +11,26 @@ public class ListTester {
         lm1.setName("Magic Items");
         lm1.setDesc("These are some of my favorite things.");
 
-        // Make some list items.
-        ListItem item1 = new ListItem();
-        item1.setName("+2 ring");
-        item1.setDesc("precious");
-        item1.setCost(42.2112);
-        item1.setNext(null);  // Redundant, but safe.
-
-        ListItem item2 = new ListItem();
-        item2.setName("Cloak of Doom");
-        item2.setDesc("Scary");
-        item2.setCost(666);
-        item2.setNext(null); // Still redundant. Still safe.
-
-        ListItem item3 = new ListItem();
-        item3.setName("broad sword");
-        item3.setDesc("sharp");
-        item3.setCost(12);
-        item3.setNext(null); // Still redundant. Still safe.
-
-        // Put items in the list.
-        lm1.add(item1);
-        lm1.add(item2);
-        lm1.add(item3);
-
-        final String fileName = "magic.txt";
+        final String fileName = "magicitems.txt";
 
         readMagicItemsFromFileToList(fileName, lm1);
         // Display the list of items.
-        System.out.println(lm1.toString());
+        // System.out.println(lm1.toString());
 
         // Declare an array for the items.
-        ListItem[] items = new ListItem[10];
+        ListItem[] items = new ListItem[lm1.getLength()];
         readMagicItemsFromFileToArray(fileName, items);
         // Display the array of items.
-        System.out.println("Items in the array:");
+        System.out.println("Items in the array BEFORE sorting:");
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                System.out.println(items[i].toString());
+            }
+        }
+
+        selectionSort(items);
+
+        System.out.println("Items in the array AFTER sorting:");
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
                 System.out.println(items[i].toString());
@@ -111,7 +96,7 @@ public class ListTester {
                 // Construct a new list item and set its attributes.
                 ListItem fileItem = new ListItem();
                 fileItem.setName(itemName);
-                fileItem.setCost(Math.random() * 100);
+                fileItem.setCost((int) (Math.random() * 100));
                 fileItem.setNext(null); // Still redundant. Still safe.
 
                 // Add the newly constructed item to the list.
@@ -139,7 +124,7 @@ public class ListTester {
                 // Construct a new list item and set its attributes.
                 ListItem fileItem = new ListItem();
                 fileItem.setName(itemName);
-                fileItem.setCost(Math.random() * 100);
+                fileItem.setCost((int) (Math.random() * 100));
                 fileItem.setNext(null); // Still redundant. Still safe.
 
                 // Add the newly constructed item to the array.
@@ -153,4 +138,30 @@ public class ListTester {
         }
     }
 
+    private static void selectionSort(ListItem[] items) {
+        for (int pass = 0; pass < items.length-1; pass++) {
+            // System.out.println(pass + "-" + items[pass]);
+            int indexOfTarget = pass;
+            int indexOfSmallest = indexOfTarget;
+            for (int j = indexOfTarget+1; j < items.length; j++) {
+                if (items[j].getName().compareToIgnoreCase(items[indexOfSmallest].getName()) < 0) {
+                    indexOfSmallest = j;
+                }
+            }
+            ListItem temp = items[indexOfTarget];
+            items[indexOfTarget] = items[indexOfSmallest];
+            items[indexOfSmallest] = temp;
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
